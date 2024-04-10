@@ -37,17 +37,17 @@ public class Login {
     private User user;
 
 
-    public Login (String application, Integer user_id)
+    public Login (String application)
     {
         this.application = application;
         this.access_date = new Date();
-        this.user.id=user_id;
+        //this.user.id=user_id;
     }
-    public Login (String application, Integer user_id, Date access_date)
+    public Login (String application, Date access_date)
     {
         this.application = application;
         this.access_date = access_date;
-        this.user.id=user_id;
+        //this.user.id=user_id;
     }
 
 }

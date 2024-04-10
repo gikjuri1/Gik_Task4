@@ -50,23 +50,27 @@ public class UsersLoginsApplication {
         int res = mdb.insertUser("Lapina001", "Lapina Elena Viktorovna");
         ls = mdb.findAll(Sort.by(Sort.Order.asc("username")));
         System.out.println("\n\n");
-        ls.forEach(System.out::println);
-//
-//        //обновим запись через нативный SQL
-        res = mdb.updateUsersSetUsernameForIdNative("Kukuyev005",1);
-        ls = mdb.findAll(Sort.by(Sort.Order.asc("username")));
-        System.out.println("\n\n");
         ls.forEach(System.out::println);*/
 //
-        /*HashSet<Login> group1 = new HashSet();
-        group1.add(new Login("Word",1));
-        group1.add(new Login("Excel",1));
-        group1.add(new Login("Corel",1));
-        group1.add(new Login("Photoshop",1));
+//        //обновим запись через нативный SQL
+        int res = mdb.updateUsersSetUsernameForIdNative("Kukuyev005",1);
+        List<User> ls = mdb.findAll(Sort.by(Sort.Order.asc("username")));
+        System.out.println("\n\n");
+        ls.forEach(System.out::println);
+//
+        HashSet<Login> group1 = new HashSet();
+        Login l1=new Login("QuarkXpress");
+        l1.setUser(ls.get(1));
+        group1.add(l1);
+
+        group1.add(new Login("Word"));
+        group1.add(new Login("Excel"));
+        group1.add(new Login("Corel"));
+        group1.add(new Login("Photoshop"));
 
         ls.get(1).logins = new HashSet<>();
         ls.get(1).logins.addAll(group1);
-        mdb.saveAll(ls);*/
+        mdb.saveAll(ls);
 
 
     }
