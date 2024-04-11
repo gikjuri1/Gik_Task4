@@ -63,41 +63,47 @@ public class ReaderFromFile implements ConveyerDataReader {
         LogRecord[] res= new LogRecord[10];
         LogRecord lr;
         //String res="";
-        try {
-            Scanner sc = new Scanner(new File(getPath()));
-            //sc.useDelimiter(" ");
-            Integer cc=1;
-            String login="";
-            String family_name="";
-            String aname="";
-            String parent_name="";
-            String access_date="";
-            String application="";
-            while (sc.hasNextLine() && cc<=10){
-                if(sc.hasNext()) {
-                    login = sc.next();
-                    family_name=sc.next();
-                    aname=sc.next();
-                    parent_name=sc.next();
-                    access_date=sc.next();
-                    application=sc.next();
-                    System.out.println("login="+login);
-                    System.out.println("Family name="+family_name);
-                    System.out.println("Name="+aname);
-                    System.out.println("Parent Name="+parent_name);
-                    System.out.println("Access Date="+access_date);
-                    System.out.println("Application="+application);
+        File folder = new File(getPath());
+        File[] listOfFiles = folder.listFiles();
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                try {
+                    Scanner sc = new Scanner(file);
+                    //sc.useDelimiter(" ");
+                    Integer cc = 1;
+                    String login = "";
+                    String family_name = "";
+                    String aname = "";
+                    String parent_name = "";
+                    String access_date = "";
+                    String application = "";
+                    while (sc.hasNextLine() && cc <= 10) {
+                        if (sc.hasNext()) {
+                            login = sc.next();
+                            family_name = sc.next();
+                            aname = sc.next();
+                            parent_name = sc.next();
+                            access_date = sc.next();
+                            application = sc.next();
+                            System.out.println("login=" + login);
+                            System.out.println("Family name=" + family_name);
+                            System.out.println("Name=" + aname);
+                            System.out.println("Parent Name=" + parent_name);
+                            System.out.println("Access Date=" + access_date);
+                            System.out.println("Application=" + application);
 
-                    lr=new LogRecord(login, family_name, aname, parent_name, access_date, application);
-                    System.out.println("LogRecord login="+lr.Login());
-                    res[cc-1]=lr;
-                    System.out.println("res.Login()="+res[cc-1].Login());
-                    cc++;
+                            lr = new LogRecord(login, family_name, aname, parent_name, access_date, application);
+                            System.out.println("LogRecord login=" + lr.Login());
+                            res[cc - 1] = lr;
+                            System.out.println("res.Login()=" + res[cc - 1].Login());
+                            cc++;
+                        }
+                    }
+                    sc.close();
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
             }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
         return res;
     }

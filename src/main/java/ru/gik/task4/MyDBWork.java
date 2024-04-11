@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface MyDBWork extends JpaRepository<User, Integer> {
     @Modifying
     @Transactional
@@ -17,6 +19,6 @@ public interface MyDBWork extends JpaRepository<User, Integer> {
     @Query(value = "INSERT INTO users (username, fio) VALUES (?1, ?2)", nativeQuery = true)
     int insertUser(String username, String fio);
 
-    User findByUsername(String username);
+    List<User> findByUsername(String username);
 
 }

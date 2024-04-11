@@ -3,6 +3,8 @@ package ru.gik.task4;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,10 +30,11 @@ public class Conveyer {
             arg = chk.check(arg);
         }
         dw.write(arg);*/
-        //dr.read();
 
+        //Чтение из файлов
         LogRecord[] lr =dr.readRecords();
         System.out.println("Conveyer LogRecord.Login="+lr[0].Login());
+
         return lr;
     }
 

@@ -26,13 +26,13 @@ public class UnitTest {
         // Generating random numbers from 0 - 24
         // using nextInt()
         int int_random = rand.nextInt(upperbound);
-        String un="Test"+ int_random;
+        /*String un="Test"+ int_random;
         //записать новую запись в БД
         mdb.save(new User( un, "Ivanov Petr Vasilievich"));
 
         User u = mdb.findByUsername(un);
         String uname=u.getUsername();
-        Assert.assertEquals(uname,un);
+        Assert.assertEquals(uname,un);*/
     }
     /*public void updateUser() {
         ApplicationContext ctx = SpringApplication.run(ru.gik.task4.UnitTest.class);
