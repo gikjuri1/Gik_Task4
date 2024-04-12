@@ -33,9 +33,18 @@ public class Conveyer {
 
         //Чтение из файлов
         LogRecord[] lr =dr.readRecords();
+        LogRecord[] lres=new LogRecord[10];
         System.out.println("Conveyer LogRecord.Login="+lr[0].Login());
 
-        return lr;
+        //LogRecord l=lr[0];
+        for (ConveyerDataChecker chk : checks) {
+            for (int i = 0; i < lr.length; i++){
+                if(lr[i]==null) break;
+                lres[i] = chk.check(lr[i]);
+            }
+        }
+
+        return lres;
     }
 
 }
