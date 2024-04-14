@@ -7,12 +7,16 @@ import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.stereotype.Component;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Calendar;
 
 @Component
 public class MyPostProccessorImpl implements BeanPostProcessor {
+    String pathOutput="C:\\temp1\\log.txt";
+
     @Override
     //это происходит до инит-метода бина
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -36,8 +40,17 @@ public class MyPostProccessorImpl implements BeanPostProcessor {
             @Override
             //собственно, логика перехвата вызова метода
             public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+                FileWriter fw;
+                try {
+                    fw = new FileWriter(pathOutput, true);
+                    String str="\nLog: bean:" + beanName + ", method:"+method.getName()+",datetime:"+Calendar.getInstance().getTime();
+                    fw.write(str);
+                    fw.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 System.out.println("interceptor!!!!");
-                System.out.printf("\nLog: bean: %s, method: %s datetime: %s", beanName, method.getName(), Calendar.getInstance().getTime());
+                //System.out.printf("\nLog: bean: %s, method: %s datetime: %s", beanName, method.getName(), Calendar.getInstance().getTime());
                 return method.invoke(bean, args);
             }
         });
